@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap');
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+@theme {
+  --color-feather-green: var(--feather-green);
+  --color-mask-green: var(--mask-green);
+  --color-tree-frog: var(--tree-frog);
+  --color-macaw: var(--macaw);
+  --color-blue-jay: var(--blue-jay);
+  --color-cardinal: var(--cardinal);
+  --color-fire-ant: var(--fire-ant);
+  --color-bee: var(--bee);
+  --color-fox: var(--fox);
+  --color-beetle: var(--beetle);
+  --color-humpback: var(--humpback);
+  --color-wolf: var(--wolf);
+  --color-hare: var(--hare);
+  --color-swan: var(--swan);
+  --color-polar: var(--polar);
+  --color-eel: var(--eel);
+  --color-snow: var(--snow);
+  
+  --font-sans: 'din-round', 'Nunito', sans-serif;
+}
+
+/* Duolingo global utility resets */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--eel);
+  background-color: var(--snow);
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom scrollbars matching Duolingo design */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--polar);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--swan);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--hare);
+}

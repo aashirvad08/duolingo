@@ -1,0 +1,40 @@
+:root {
+  --feather-green: #58CC02;   /* primary CTA */
+  --mask-green:    #89E219;   /* hover */
+  --tree-frog:     #58A700;   /* button shadow/3D bottom */
+  
+  --macaw:         #1CB0F6;   /* blue, secondary */
+  --blue-jay:      #1899D6;   /* blue shadow */
+  
+  --cardinal:      #FF4B4B;   /* hearts, wrong */
+  --fire-ant:      #EA2B2B;   /* red shadow */
+  
+  --bee:           #FFC800;   /* XP, gold */
+  --fox:           #FF9600;   /* streak flame */
+  --beetle:        #CE82FF;   /* purple */
+  --humpback:      #2B70C9;
+  
+  --wolf:          #777777;   /* secondary text */
+  --hare:          #AFAFAF;
+  --swan:          #E5E5E5;   /* borders, locked */
+  --polar:         #F7F7F7;   /* bg tint */
+  --eel:           #4B4B4B;   /* primary text */
+  --snow:          #FFFFFF;
+}
+
+[data-theme="dark"] {
+  --polar:         #131F24;   /* dark background tint */
+  --snow:          #1F2F37;   /* dark background cards */
+  --eel:           #F1F5F9;   /* light text for dark mode */
+  --wolf:          #94A3B8;   /* secondary text dark */
+  --swan:          #374151;   /* borders dark */
+  --hare:          #4B5563;
+}
+
+body {
+  font-family: 'din-round', 'Nunito', sans-serif;
+  font-weight: 700; /* Duolingo relies on heavy weights */
+  color: var(--eel);
+  background-color: var(--snow);
+  -webkit-font-smoothing: antialiased;
+}
