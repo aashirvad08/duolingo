@@ -10,9 +10,7 @@ services:
       - key: PYTHON_VERSION
         value: 3.11.8
       - key: DATABASE_URL
-        fromDatabase:
-          name: duolingo-postgres-db
-          property: connectionString
+        sync: false # You will paste your free database URL here (from Supabase)
 
   # 2. Next.js Node Frontend Service
   - type: web
@@ -29,9 +27,3 @@ services:
           name: duolingo-backend
           type: web
           property: host
-
-databases:
-  # 3. PostgreSQL Database (Render Free Tier)
-  - name: duolingo-postgres-db
-    plan: free
-    postgresMajorVersion: 15
