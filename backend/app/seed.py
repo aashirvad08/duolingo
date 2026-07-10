@@ -545,15 +545,20 @@ def seed_db():
 
     # 11. User Achievements progress
     # Let's unlock a few achievements for the learner
-    # Sage tier 3: earned 1240 XP (sage tiers: 100, 500, 1000, 5000)
-    # Wildfire tier 3: streak of 12 (wildfire tiers: 3, 7, 14, 30) -> actually tier 2 (current=12, next tier 3 is 14)
-    # Superstar tier 2: crowns = 4*5 + 1 = 21 crowns (superstar tiers: 5, 20, 50)
-    # Sharpshooter tier 2
+    # Resolve dynamic achievement IDs (Postgres sequences don't reset automatically on delete)
+    db_achievements = db.query(Achievement).all()
+    ach_map = {ach.code: ach.id for ach in db_achievements}
+
+    wildfire_id = ach_map.get("wildfire", 1)
+    sage_id = ach_map.get("sage", 2)
+    sharpshooter_id = ach_map.get("sharpshooter", 5)
+    superstar_id = ach_map.get("superstar", 6)
+
     user_achs = [
-        UserAchievement(user_id=learner.id, achievement_id=1, tier_reached=2, unlocked_at=datetime.utcnow() - timedelta(days=5)), # Wildfire
-        UserAchievement(user_id=learner.id, achievement_id=2, tier_reached=3, unlocked_at=datetime.utcnow() - timedelta(days=2)), # Sage
-        UserAchievement(user_id=learner.id, achievement_id=5, tier_reached=2, unlocked_at=datetime.utcnow() - timedelta(days=1)), # Sharpshooter
-        UserAchievement(user_id=learner.id, achievement_id=6, tier_reached=2, unlocked_at=datetime.utcnow() - timedelta(days=3))  # Superstar
+        UserAchievement(user_id=learner.id, achievement_id=wildfire_id, tier_reached=2, unlocked_at=datetime.utcnow() - timedelta(days=5)), # Wildfire
+        UserAchievement(user_id=learner.id, achievement_id=sage_id, tier_reached=3, unlocked_at=datetime.utcnow() - timedelta(days=2)), # Sage
+        UserAchievement(user_id=learner.id, achievement_id=sharpshooter_id, tier_reached=2, unlocked_at=datetime.utcnow() - timedelta(days=1)), # Sharpshooter
+        UserAchievement(user_id=learner.id, achievement_id=superstar_id, tier_reached=2, unlocked_at=datetime.utcnow() - timedelta(days=3))  # Superstar
     ]
     db.add_all(user_achs)
     db.commit()
