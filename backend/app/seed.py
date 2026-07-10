@@ -15,23 +15,45 @@ from app.models.db_models import (
 )
 
 def seed_db():
+    from sqlalchemy import text
     db = SessionLocal()
     
     # 1. Clear database
     print("Clearing database...")
-    db.query(UserAchievement).delete()
-    db.query(Achievement).delete()
-    db.query(LeaderboardEntry).delete()
-    db.query(DailyActivity).delete()
-    db.query(UserSkillProgress).delete()
-    db.query(Exercise).delete()
-    db.query(Lesson).delete()
-    db.query(Skill).delete()
-    db.query(Unit).delete()
-    db.query(Course).delete()
-    db.query(UserStats).delete()
-    db.query(User).delete()
-    db.commit()
+    if engine.dialect.name == "postgresql":
+        # Truncate tables and reset all auto-increment sequences to 1
+        db.execute(text("""
+            TRUNCATE TABLE 
+                user_achievements, 
+                achievements, 
+                leaderboard_entries, 
+                daily_activity, 
+                user_skill_progress, 
+                exercises, 
+                lessons, 
+                skills, 
+                units, 
+                courses, 
+                user_stats, 
+                users 
+            RESTART IDENTITY CASCADE
+        """))
+        db.commit()
+    else:
+        # Fallback for SQLite
+        db.query(UserAchievement).delete()
+        db.query(Achievement).delete()
+        db.query(LeaderboardEntry).delete()
+        db.query(DailyActivity).delete()
+        db.query(UserSkillProgress).delete()
+        db.query(Exercise).delete()
+        db.query(Lesson).delete()
+        db.query(Skill).delete()
+        db.query(Unit).delete()
+        db.query(Course).delete()
+        db.query(UserStats).delete()
+        db.query(User).delete()
+        db.commit()
 
     print("Seeding database...")
 
