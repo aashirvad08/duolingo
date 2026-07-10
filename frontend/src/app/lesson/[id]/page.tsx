@@ -162,6 +162,17 @@ export default function LessonPlayerPage() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isAnswered, currentAnswer, isSubmitting]);
 
+  // Auto-speak Spanish prompt on load/advance
+  useEffect(() => {
+    if (session) {
+      const activeExercise = session.deck[session.currentIndex];
+      const isComplete = session.currentIndex >= session.deck.length;
+      if (activeExercise && !isComplete) {
+        speakSpanish(activeExercise.prompt);
+      }
+    }
+  }, [session?.currentIndex, loading]);
+
   if (loading) {
     return (
       <div className="min-h-screen bg-white dark:bg-slate-900 flex flex-col justify-between p-6">
@@ -216,13 +227,6 @@ export default function LessonPlayerPage() {
   const isLessonComplete = currentIndex >= deck.length;
 
   const currentExercise = deck[currentIndex];
-
-  // Auto-speak Spanish prompt on load/advance
-  useEffect(() => {
-    if (currentExercise && !isLessonComplete) {
-      speakSpanish(currentExercise.prompt);
-    }
-  }, [currentIndex, isLessonComplete]);
 
   const handleCheck = async () => {
     if (isSubmitting || currentAnswer === null || currentAnswer === "") return;
