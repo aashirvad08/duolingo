@@ -160,10 +160,70 @@ export default function LearnPage() {
                         lessonsCount={skill.lessons_count}
                         status={skill.status}
                         onStartLesson={() => handleStartLesson(skill.id, skill.lessons_completed)}
+                        type="skill"
+                        unitId={unit.id}
                       />
                     </div>
                   );
                 })}
+
+                {/* Dynamic Chest Node at end of unit */}
+                {(() => {
+                  const lastSkill = unit.skills[unit.skills.length - 1];
+                  const isUnitFinished = lastSkill ? (lastSkill.status === "completed" || lastSkill.status === "legendary") : false;
+                  const chestStatus = isUnitFinished ? "available" : "locked";
+                  const x = offsets[skillGlobalIndex % 8];
+                  skillGlobalIndex++;
+
+                  return (
+                    <div
+                      style={{ transform: `translateX(${x}px)` }}
+                      className="transition-transform duration-300"
+                    >
+                      <SkillNode
+                        id={1000 + unit.id}
+                        title="Chest"
+                        iconName="chest"
+                        crowns={isUnitFinished ? 1 : 0}
+                        lessonsCompleted={0}
+                        lessonsCount={0}
+                        status={chestStatus}
+                        onStartLesson={() => {}}
+                        type="chest"
+                        unitId={unit.id}
+                      />
+                    </div>
+                  );
+                })()}
+
+                {/* Dynamic Trophy Node at end of unit */}
+                {(() => {
+                  const lastSkill = unit.skills[unit.skills.length - 1];
+                  const isUnitFinished = lastSkill ? (lastSkill.status === "completed" || lastSkill.status === "legendary") : false;
+                  const trophyStatus = isUnitFinished ? "available" : "locked";
+                  const x = offsets[skillGlobalIndex % 8];
+                  skillGlobalIndex++;
+
+                  return (
+                    <div
+                      style={{ transform: `translateX(${x}px)` }}
+                      className="transition-transform duration-300"
+                    >
+                      <SkillNode
+                        id={2000 + unit.id}
+                        title={`Unit ${unit.order_index} Trophy`}
+                        iconName="trophy"
+                        crowns={isUnitFinished ? 1 : 0}
+                        lessonsCompleted={0}
+                        lessonsCount={0}
+                        status={trophyStatus}
+                        onStartLesson={() => {}}
+                        type="trophy"
+                        unitId={unit.id}
+                      />
+                    </div>
+                  );
+                })()}
               </div>
 
             </section>

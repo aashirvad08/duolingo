@@ -194,12 +194,12 @@ def seed_db():
     skills = [
         # Unit 1 Skills
         Skill(unit_id=unit1.id, order_index=1, title="Intro", icon_name="home", lessons_count=3, max_crowns=5),
-        Skill(unit_id=unit1.id, order_index=2, title="Travel", icon_name="plane", lessons_count=3, max_crowns=5),
+        Skill(unit_id=unit1.id, order_index=2, title="Travel", icon_name="headphones", lessons_count=3, max_crowns=5),
         Skill(unit_id=unit1.id, order_index=3, title="Family", icon_name="users", lessons_count=3, max_crowns=5),
         Skill(unit_id=unit1.id, order_index=4, title="People", icon_name="user", lessons_count=3, max_crowns=5),
         
         # Unit 2 Skills
-        Skill(unit_id=unit2.id, order_index=5, title="Greetings", icon_name="message-circle", lessons_count=3, max_crowns=5),
+        Skill(unit_id=unit2.id, order_index=5, title="Greetings", icon_name="microphone", lessons_count=3, max_crowns=5),
         Skill(unit_id=unit2.id, order_index=6, title="Work", icon_name="briefcase", lessons_count=3, max_crowns=5),
         Skill(unit_id=unit2.id, order_index=7, title="Leisure", icon_name="compass", lessons_count=3, max_crowns=5),
         Skill(unit_id=unit2.id, order_index=8, title="Shopping", icon_name="shopping-bag", lessons_count=3, max_crowns=5),
