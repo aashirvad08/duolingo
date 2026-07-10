@@ -11,11 +11,13 @@ import { SkillNode } from "@/components/ui/SkillNode";
 import { Modal } from "@/components/ui/Modal";
 import { Button } from "@/components/ui/Button";
 
+import { getApiUrl } from "@/utils/api";
+
 // Path offsets for the serpentine zigzag
 const offsets = [0, 45, 70, 45, 0, -45, -70, -45];
 
 const fetchCoursePath = async () => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+  const apiUrl = getApiUrl();
   const res = await fetch(`${apiUrl}/api/v1/courses/1/path`, {
     headers: { "X-User-Id": "1" }
   });

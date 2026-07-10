@@ -20,9 +20,11 @@ import { MatchPairs } from "@/components/exercises/MatchPairs";
 import { FillBlank } from "@/components/exercises/FillBlank";
 import { TypeAnswer } from "@/components/exercises/TypeAnswer";
 
+import { getApiUrl } from "@/utils/api";
+
 // Helper API functions
 const startLessonAttempt = async (lessonId: number) => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+  const apiUrl = getApiUrl();
   const res = await fetch(`${apiUrl}/api/v1/lessons/${lessonId}/start`, {
     method: "POST",
     headers: { "X-User-Id": "1" }
@@ -35,7 +37,7 @@ const startLessonAttempt = async (lessonId: number) => {
 };
 
 const fetchLessonDetails = async (lessonId: number) => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+  const apiUrl = getApiUrl();
   const res = await fetch(`${apiUrl}/api/v1/lessons/${lessonId}`, {
     headers: { "X-User-Id": "1" }
   });
@@ -44,7 +46,7 @@ const fetchLessonDetails = async (lessonId: number) => {
 };
 
 const submitAnswerAPI = async (attemptId: number, exerciseId: number, answer: any) => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+  const apiUrl = getApiUrl();
   const res = await fetch(`${apiUrl}/api/v1/attempts/${attemptId}/answer`, {
     method: "POST",
     headers: {
@@ -58,7 +60,7 @@ const submitAnswerAPI = async (attemptId: number, exerciseId: number, answer: an
 };
 
 const completeAttemptAPI = async (attemptId: number) => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+  const apiUrl = getApiUrl();
   const res = await fetch(`${apiUrl}/api/v1/attempts/${attemptId}/complete`, {
     method: "POST",
     headers: { "X-User-Id": "1" }
@@ -68,7 +70,7 @@ const completeAttemptAPI = async (attemptId: number) => {
 };
 
 const refillHeartsAPI = async () => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+  const apiUrl = getApiUrl();
   const res = await fetch(`${apiUrl}/api/v1/hearts/refill`, {
     method: "POST",
     headers: { "X-User-Id": "1" }

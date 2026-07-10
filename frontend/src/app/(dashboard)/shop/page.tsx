@@ -6,8 +6,10 @@ import { useLessonStore } from "@/store/useLessonStore";
 import { Button } from "@/components/ui/Button";
 import { Toast } from "@/components/ui/Toast";
 
+import { getApiUrl } from "@/utils/api";
+
 const refillHeartsAPI = async () => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+  const apiUrl = getApiUrl();
   const res = await fetch(`${apiUrl}/api/v1/hearts/refill`, {
     method: "POST",
     headers: { "X-User-Id": "1" }

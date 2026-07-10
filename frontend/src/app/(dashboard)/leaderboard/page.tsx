@@ -5,9 +5,11 @@ import { useQuery } from "@tanstack/react-query";
 import { Trophy, Flame, ShieldAlert, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
+import { getApiUrl } from "@/utils/api";
+
 // Fetch leaderboard data
 const fetchLeaderboard = async () => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+  const apiUrl = getApiUrl();
   const res = await fetch(`${apiUrl}/api/v1/leaderboard`, {
     headers: { "X-User-Id": "1" }
   });

@@ -9,16 +9,18 @@ import { Button } from "@/components/ui/Button";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Toast } from "@/components/ui/Toast";
 
+import { getApiUrl } from "@/utils/api";
+
 // API Fetchers
 const fetchProfileData = async () => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+  const apiUrl = getApiUrl();
   const res = await fetch(`${apiUrl}/api/v1/profile/1`);
   if (!res.ok) throw new Error("Failed to fetch profile");
   return res.json();
 };
 
 const triggerAdvanceDay = async () => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+  const apiUrl = getApiUrl();
   const res = await fetch(`${apiUrl}/api/v1/debug/advance-day`, {
     method: "POST",
     headers: { "X-User-Id": "1" }

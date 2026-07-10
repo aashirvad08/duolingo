@@ -8,9 +8,12 @@ import { useLessonStore } from "@/store/useLessonStore";
 import { ProgressBar } from "../ui/ProgressBar";
 import { Button } from "../ui/Button";
 
+import { getApiUrl } from "@/utils/api";
+
 // Simple API fetcher
 const fetchLeaderboardPreview = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/v1/leaderboard`, {
+  const apiUrl = getApiUrl();
+  const res = await fetch(`${apiUrl}/api/v1/leaderboard`, {
     headers: { "X-User-Id": "1" }
   });
   if (!res.ok) throw new Error("Failed to fetch leaderboard");

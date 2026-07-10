@@ -4,6 +4,8 @@ import React, { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useLessonStore } from "@/store/useLessonStore";
 
+import { getApiUrl } from "@/utils/api";
+
 const queryClient = new QueryClient();
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -12,7 +14,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   useEffect(() => {
     const loadStats = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+        const apiUrl = getApiUrl();
         const res = await fetch(`${apiUrl}/api/v1/me`, {
           headers: { "X-User-Id": "1" }
         });
