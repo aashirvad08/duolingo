@@ -14,6 +14,14 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
+import os
+# Overwrite sqlalchemy.url dynamically with DATABASE_URL env var if available
+db_url = os.getenv("DATABASE_URL")
+if db_url:
+    if db_url.startswith("postgres://"):
+        db_url = db_url.replace("postgres://", "postgresql://", 1)
+    config.set_main_option("sqlalchemy.url", db_url)
+
 # add your model's MetaData object here
 # for 'autogenerate' support
 import os
