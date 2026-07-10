@@ -13,6 +13,7 @@ import { Modal } from "@/components/ui/Modal";
 import { Toast } from "@/components/ui/Toast";
 import { playCorrectSound, playWrongSound } from "@/utils/sounds";
 import { MascotDuo } from "@/components/ui/Icons";
+import { speakSpanish } from "@/utils/tts";
 
 import { MultipleChoice } from "@/components/exercises/MultipleChoice";
 import { Translate } from "@/components/exercises/Translate";
@@ -215,6 +216,13 @@ export default function LessonPlayerPage() {
   const isLessonComplete = currentIndex >= deck.length;
 
   const currentExercise = deck[currentIndex];
+
+  // Auto-speak Spanish prompt on load/advance
+  useEffect(() => {
+    if (currentExercise && !isLessonComplete) {
+      speakSpanish(currentExercise.prompt);
+    }
+  }, [currentIndex, isLessonComplete]);
 
   const handleCheck = async () => {
     if (isSubmitting || currentAnswer === null || currentAnswer === "") return;

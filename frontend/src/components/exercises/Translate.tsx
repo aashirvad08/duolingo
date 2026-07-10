@@ -8,6 +8,8 @@ interface TranslateProps {
   disabled?: boolean;
 }
 
+import { speakSpanish } from "@/utils/tts";
+
 export const Translate: React.FC<TranslateProps> = ({
   wordBank,
   selectedWords,
@@ -16,6 +18,7 @@ export const Translate: React.FC<TranslateProps> = ({
 }) => {
   const handleWordTap = (word: string) => {
     if (disabled) return;
+    speakSpanish(word);
     // Add word to selected
     const updated = [...selectedWords, word];
     onChange(updated);
