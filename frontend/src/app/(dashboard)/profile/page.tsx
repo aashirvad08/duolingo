@@ -47,7 +47,7 @@ export default function ProfilePage() {
     onSuccess: (data) => {
       setStats(data);
       refetch();
-      setToastMessage("Advanced day successfully! Simulated streak dates.");
+      setToastMessage("Day advanced! Complete a lesson now to increase your streak.");
       setToastVisible(true);
     },
     onError: (err: any) => {
@@ -57,9 +57,17 @@ export default function ProfilePage() {
 
   const toggleTheme = () => {
     if (typeof window !== "undefined") {
-      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute("data-theme");
       const newTheme = currentTheme === "dark" ? "light" : "dark";
-      document.documentElement.setAttribute("data-theme", newTheme);
+      
+      html.setAttribute("data-theme", newTheme);
+      if (newTheme === "dark") {
+        html.classList.add("dark");
+      } else {
+        html.classList.remove("dark");
+      }
+      
       setToastMessage(`Theme switched to ${newTheme} mode!`);
       setToastVisible(true);
     }

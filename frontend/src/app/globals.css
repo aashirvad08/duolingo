@@ -2,6 +2,8 @@
 @import "tailwindcss";
 @import "../styles/tokens.css";
 
+@variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-feather-green: var(--feather-green);
   --color-mask-green: var(--mask-green);
