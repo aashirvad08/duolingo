@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, CheckCircle2, XCircle, Heart, Shield, Award, Calendar, Percent, Clock, Sparkles } from "lucide-react";
+import { X, CheckCircle2, XCircle, Heart, Shield, Award, Calendar, Percent, Clock, Sparkles, Volume2 } from "lucide-react";
 import confetti from "canvas-confetti";
 
 import { useLessonStore } from "@/store/useLessonStore";
@@ -14,6 +14,7 @@ import { Toast } from "@/components/ui/Toast";
 import { playCorrectSound, playWrongSound } from "@/utils/sounds";
 import { MascotDuo } from "@/components/ui/Icons";
 import { speakSpanish } from "@/utils/tts";
+import { getExerciseMascot } from "@/components/ui/Characters";
 
 import { MultipleChoice } from "@/components/exercises/MultipleChoice";
 import { Translate } from "@/components/exercises/Translate";
@@ -445,10 +446,33 @@ export default function LessonPlayerPage() {
       <main className="flex-1 max-w-3xl mx-auto w-full px-6 flex flex-col justify-center items-center py-6">
         <div className="w-full space-y-6">
           
-          {/* Prompt */}
-          <h2 className="text-xl md:text-2xl font-black text-eel dark:text-white text-center">
-            {currentExercise.prompt}
-          </h2>
+          {/* Character Speech Bubble Layout */}
+          <div className="flex items-end justify-center gap-4 py-4 max-w-xl mx-auto w-full">
+            {/* Deterministic Character Mascot on the Left */}
+            <div className="flex-shrink-0 animate-bounce-slow">
+              {getExerciseMascot(currentExercise.id, 90)}
+            </div>
+
+            {/* Speech Bubble on the Right */}
+            <div className="flex-1 bg-white dark:bg-slate-800 border-2 border-swan dark:border-slate-700 rounded-3xl p-4 md:p-5 relative shadow-sm min-h-[85px] flex items-center justify-between gap-4">
+              {/* Left-pointing bubble arrow tail */}
+              <div className="absolute left-[-9px] bottom-[24px] w-4 h-4 bg-white dark:bg-slate-800 rotate-45 border-l-2 border-b-2 border-swan dark:border-slate-700" />
+              
+              {/* Speaker sound tap trigger + text */}
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => speakSpanish(currentExercise.prompt)}
+                  className="w-10 h-10 rounded-xl bg-macaw hover:bg-blue-jay text-white flex items-center justify-center cursor-pointer shadow-sm active:translate-y-0.5"
+                  title="Pronounce prompt"
+                >
+                  <Volume2 className="w-5 h-5 fill-current" />
+                </button>
+                <h2 className="text-sm md:text-base font-extrabold text-eel dark:text-white text-left leading-snug">
+                  {currentExercise.prompt}
+                </h2>
+              </div>
+            </div>
+          </div>
 
           {/* Nested Exercise View */}
           <div className="py-2">
