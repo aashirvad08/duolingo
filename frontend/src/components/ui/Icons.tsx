@@ -126,74 +126,131 @@ export const MascotDuo: React.FC<IconProps & { mood?: "happy" | "sad" | "shocked
   className = "",
   ...props
 }) => {
-  // Duo Owl SVG details: green body, large eyes, orange beak and feet
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 100 100"
+      viewBox="0 0 120 100"
       className={`${className}`}
       {...props}
     >
-      {/* Body */}
-      <rect x="20" y="25" width="60" height="60" rx="30" fill="var(--feather-green)" />
-      
-      {/* White Belly */}
-      <path d="M30 65 Q50 45 70 65" fill="none" stroke="white" strokeWidth="8" strokeLinecap="round" />
-      
-      {/* Face details depending on mood */}
-      {/* Big Eyes Backing */}
-      <circle cx="38" cy="45" r="16" fill="white" />
-      <circle cx="62" cy="45" r="16" fill="white" />
-      
-      {/* Eye Pupils */}
+      {/* Left and Right Wings */}
+      <path
+        d="M 32,55 C 12,50 8,32 22,37 C 32,40 37,47 37,55 Z"
+        fill="var(--feather-green)"
+      />
+      <path
+        d="M 88,55 C 108,50 112,32 98,37 C 88,40 83,47 83,55 Z"
+        fill="var(--feather-green)"
+      />
+
+      {/* Main Body (Ears Tuft + Body Shell) */}
+      <path
+        d="M 35,22 
+           C 40,16 50,16 60,25 
+           C 70,16 80,16 85,22 
+           C 95,28 97,76 82,86 
+           C 72,92 48,92 38,86 
+           C 23,76 25,28 35,22 Z"
+        fill="var(--feather-green)"
+      />
+
+      {/* Face Mask Patch */}
+      <path
+        d="M 40,32
+           C 48,24 56,36 60,36
+           C 64,36 72,24 80,32
+           C 88,40 88,60 80,65
+           C 72,70 48,70 40,65
+           C 32,60 32,40 40,32 Z"
+        fill="var(--mask-green)"
+      />
+
+      {/* Eye Backings (White) */}
+      <circle cx="48" cy="45" r="11" fill="white" />
+      <circle cx="72" cy="45" r="11" fill="white" />
+
+      {/* Pupils & Reflections */}
       {mood === "happy" && (
         <>
-          <circle cx="38" cy="45" r="8" fill="#4B4B4B" />
-          <circle cx="62" cy="45" r="8" fill="#4B4B4B" />
-          <circle cx="36" cy="43" r="3" fill="white" />
-          <circle cx="60" cy="43" r="3" fill="white" />
+          <circle cx="48" cy="45" r="6.5" fill="var(--eel)" />
+          <circle cx="72" cy="45" r="6.5" fill="var(--eel)" />
+          <circle cx="46.5" cy="43" r="2.2" fill="white" />
+          <circle cx="70.5" cy="43" r="2.2" fill="white" />
         </>
       )}
-      
+
       {mood === "sad" && (
         <>
-          {/* Half-closed sad pupils */}
-          <path d="M30 48 Q38 40 46 48" stroke="#4B4B4B" strokeWidth="4" fill="none" />
-          <path d="M54 48 Q62 40 70 48" stroke="#4B4B4B" strokeWidth="4" fill="none" />
+          {/* Semicircle downward eyes */}
+          <path d="M 41,47 Q 48,39 55,47" fill="none" stroke="var(--eel)" strokeWidth="4.5" strokeLinecap="round" />
+          <path d="M 65,47 Q 72,39 79,47" fill="none" stroke="var(--eel)" strokeWidth="4.5" strokeLinecap="round" />
         </>
       )}
 
       {mood === "shocked" && (
         <>
-          {/* Wide pupils */}
-          <circle cx="38" cy="45" r="5" fill="#4B4B4B" />
-          <circle cx="62" cy="45" r="5" fill="#4B4B4B" />
+          <circle cx="48" cy="45" r="4" fill="var(--eel)" />
+          <circle cx="72" cy="45" r="4" fill="var(--eel)" />
         </>
       )}
-      
-      {/* Beak */}
-      {mood === "happy" && (
-        <polygon points="45,48 55,48 50,58" fill="var(--fox)" />
-      )}
-      {mood === "sad" && (
-        <polygon points="45,53 55,53 50,47" fill="var(--fox)" />
-      )}
-      {mood === "shocked" && (
-        <circle cx="50" cy="53" r="5" fill="var(--fox)" />
-      )}
-      
-      {/* Cheeks */}
+
+      {/* Beak & Mouth */}
       {mood === "happy" && (
         <>
-          <ellipse cx="28" cy="54" rx="4" ry="2" fill="var(--mask-green)" opacity="0.6" />
-          <ellipse cx="72" cy="54" rx="4" ry="2" fill="var(--mask-green)" opacity="0.6" />
+          {/* Open mouth under beak */}
+          <path
+            d="M 55,51 C 55,51 55,61 60,61 C 65,61 65,51 65,51 Z"
+            fill="var(--fox)"
+          />
+          {/* Upper Beak */}
+          <path
+            d="M 53,50 C 53,50 56,44 60,44 C 64,44 67,50 67,50 C 67,50 60,54 60,54 C 60,54 53,50 53,50 Z"
+            fill="var(--bee)"
+          />
         </>
       )}
-      
+
+      {mood === "sad" && (
+        <>
+          {/* Sad downturned beak */}
+          <path
+            d="M 54,54 C 54,54 57,48 60,48 C 63,48 66,54 66,54 Z"
+            fill="var(--bee)"
+          />
+        </>
+      )}
+
+      {mood === "shocked" && (
+        <>
+          {/* Shocked open mouth circle */}
+          <circle cx="60" cy="54" r="5" fill="var(--fox)" />
+          <path
+            d="M 54,49 C 54,49 57,45 60,45 C 63,45 66,49 66,49 Z"
+            fill="var(--bee)"
+          />
+        </>
+      )}
+
+      {/* Chest Feathers (Chevrons) */}
+      <path
+        d="M 54,72 Q 60,76 66,72"
+        fill="none"
+        stroke="var(--mask-green)"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M 49,78 Q 60,83 71,78"
+        fill="none"
+        stroke="var(--mask-green)"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+
       {/* Feet */}
-      <ellipse cx="35" cy="86" rx="8" ry="4" fill="var(--fox)" />
-      <ellipse cx="65" cy="86" rx="8" ry="4" fill="var(--fox)" />
+      <rect x="41" y="88" width="10" height="5" rx="2.5" fill="var(--fox)" transform="rotate(-15 46 90)" />
+      <rect x="69" y="88" width="10" height="5" rx="2.5" fill="var(--fox)" transform="rotate(15 74 90)" />
     </svg>
   );
 };

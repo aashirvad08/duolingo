@@ -1,7 +1,7 @@
 :root {
   --feather-green: #58CC02;   /* primary CTA */
   --mask-green:    #89E219;   /* hover */
-  --tree-frog:     #58A700;   /* button shadow/3D bottom */
+  --tree-frog:     #43C000;   /* button shadow/3D bottom (updated) */
   
   --macaw:         #1CB0F6;   /* blue, secondary */
   --blue-jay:      #1899D6;   /* blue shadow */
@@ -9,9 +9,13 @@
   --cardinal:      #FF4B4B;   /* hearts, wrong */
   --fire-ant:      #EA2B2B;   /* red shadow */
   
-  --bee:           #FFC800;   /* XP, gold */
-  --fox:           #FF9600;   /* streak flame */
+  --bee:           #FFC200;   /* XP, gold (updated) */
+  --fox:           #F49000;   /* streak flame / gold shadow (updated) */
+  --bright-yellow: #FFDE00;   /* bright yellow accent */
+  --gold-shadow:   #B66E28;   /* bronze gold shadow */
+  
   --beetle:        #CE82FF;   /* purple */
+  --light-purple:  #FFCAFF;   /* light pink/purple accent */
   --humpback:      #2B70C9;
   
   --wolf:          #777777;   /* secondary text */
