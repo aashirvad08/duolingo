@@ -36,6 +36,8 @@ interface SkillNodeProps {
   onStartLesson: () => void;
   type?: "skill" | "chest" | "trophy";
   unitId?: number;
+  isOpen?: boolean;
+  onToggle?: (open: boolean) => void;
 }
 
 export const SkillNode: React.FC<SkillNodeProps> = ({
@@ -49,10 +51,18 @@ export const SkillNode: React.FC<SkillNodeProps> = ({
   status,
   onStartLesson,
   type = "skill",
-  unitId = 1
+  unitId = 1,
+  isOpen,
+  onToggle
 }) => {
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [localOpen, setLocalOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const isPopoverOpen = isOpen !== undefined ? isOpen : localOpen;
+  const setIsPopoverOpen = (open: boolean) => {
+    if (onToggle) onToggle(open);
+    setLocalOpen(open);
+  };
   
   // Zustand stats store to claim rewards
   const stats = useLessonStore((state) => state.stats);
@@ -150,7 +160,7 @@ export const SkillNode: React.FC<SkillNodeProps> = ({
   const strokeDashoffset = circumference - progressRatio * circumference;
 
   return (
-    <div ref={containerRef} className="relative flex flex-col items-center select-none">
+    <div ref={containerRef} className={`relative flex flex-col items-center select-none ${isPopoverOpen ? "z-40" : "z-0"}`}>
       {/* Start Bouncing Tooltip above available skills */}
       {status === "available" && type === "skill" && !isPopoverOpen && (
         <motion.div

@@ -28,6 +28,7 @@ const fetchCoursePath = async () => {
 export default function LearnPage() {
   const router = useRouter();
   const [guidebookUnit, setGuidebookUnit] = useState<{ title: string; desc: string } | null>(null);
+  const [activeNodeId, setActiveNodeId] = useState<number | null>(null);
 
   // Fetch course details
   const { data: pathData, isLoading, error } = useQuery({
@@ -143,12 +144,13 @@ export default function LearnPage() {
                 {unit.skills.map((skill: any) => {
                   const x = offsets[skillGlobalIndex % 8];
                   skillGlobalIndex++;
+                  const isOpen = activeNodeId === skill.id;
 
                   return (
                     <div
                       key={skill.id}
                       style={{ transform: `translateX(${x}px)` }}
-                      className="transition-transform duration-300"
+                      className={`transition-transform duration-300 relative ${isOpen ? "z-40" : "z-0"}`}
                     >
                       <SkillNode
                         id={skill.id}
@@ -162,6 +164,8 @@ export default function LearnPage() {
                         onStartLesson={() => handleStartLesson(skill.id, skill.lessons_completed)}
                         type="skill"
                         unitId={unit.id}
+                        isOpen={isOpen}
+                        onToggle={(open) => setActiveNodeId(open ? skill.id : null)}
                       />
                     </div>
                   );
@@ -174,14 +178,17 @@ export default function LearnPage() {
                   const chestStatus = isUnitFinished ? "available" : "locked";
                   const x = offsets[skillGlobalIndex % 8];
                   skillGlobalIndex++;
+                  
+                  const nodeId = 1000 + unit.id;
+                  const isOpen = activeNodeId === nodeId;
 
                   return (
                     <div
                       style={{ transform: `translateX(${x}px)` }}
-                      className="transition-transform duration-300"
+                      className={`transition-transform duration-300 relative ${isOpen ? "z-40" : "z-0"}`}
                     >
                       <SkillNode
-                        id={1000 + unit.id}
+                        id={nodeId}
                         title="Chest"
                         iconName="chest"
                         crowns={isUnitFinished ? 1 : 0}
@@ -191,6 +198,8 @@ export default function LearnPage() {
                         onStartLesson={() => {}}
                         type="chest"
                         unitId={unit.id}
+                        isOpen={isOpen}
+                        onToggle={(open) => setActiveNodeId(open ? nodeId : null)}
                       />
                     </div>
                   );
@@ -203,14 +212,17 @@ export default function LearnPage() {
                   const trophyStatus = isUnitFinished ? "available" : "locked";
                   const x = offsets[skillGlobalIndex % 8];
                   skillGlobalIndex++;
+                  
+                  const nodeId = 2000 + unit.id;
+                  const isOpen = activeNodeId === nodeId;
 
                   return (
                     <div
                       style={{ transform: `translateX(${x}px)` }}
-                      className="transition-transform duration-300"
+                      className={`transition-transform duration-300 relative ${isOpen ? "z-40" : "z-0"}`}
                     >
                       <SkillNode
-                        id={2000 + unit.id}
+                        id={nodeId}
                         title={`Unit ${unit.order_index} Trophy`}
                         iconName="trophy"
                         crowns={isUnitFinished ? 1 : 0}
@@ -220,6 +232,8 @@ export default function LearnPage() {
                         onStartLesson={() => {}}
                         type="trophy"
                         unitId={unit.id}
+                        isOpen={isOpen}
+                        onToggle={(open) => setActiveNodeId(open ? nodeId : null)}
                       />
                     </div>
                   );
