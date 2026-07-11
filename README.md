@@ -1,5 +1,7 @@
 # Duolingo Clone — Full Stack Web Application
 
+> 🚀 **Live Demo:** Access the website here: [https://duolingo-aaz8apnzl-rampofins-projects.vercel.app/learn](https://duolingo-aaz8apnzl-rampofins-projects.vercel.app/learn)
+
 A production-quality clone of the modern Duolingo web application (2024–25 UI). Features a fully functional lesson loop with 5 distinct exercise types, progress serialization, automated heart refills via gems, daily activity heatmaps, a Ruby League leaderboard, and achievements gamification.
 
 ---

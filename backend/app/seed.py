@@ -434,7 +434,7 @@ def seed_db():
 
     # Add 10 other mock users for leaderboard
     leaderboard_names = [
-        ("luis_es", "Luis", 1800),
+        ("aashirvad_top", "Aashirvad", 1800),
         ("maria_g", "Maria", 1500),
         ("juan_23", "Juan", 1100),
         ("ana_chef", "Ana", 950),
